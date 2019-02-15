@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function() {
+        console.log("ready!");
+        $.ajax({
+          type: "GET",
+          url: "/data",
+          success: function(data) {
+            $("#output").html("<p>" + JSON.stringify(data) + "</p>");
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+</html>
