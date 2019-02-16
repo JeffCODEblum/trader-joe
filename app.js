@@ -1,4 +1,4 @@
-const PORT = 3000;
+const PORT = 8080;
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname + "/public")));
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
 
@@ -146,6 +146,7 @@ function Poll() {
       console.log("SELL");
       holdingsDollars += holdingsBtc * lastPrice;
       holdingsBtc = 0;
+      runningInvestment = 0;
       fs.appendFile(
         "log.txt",
         today.toString() +
