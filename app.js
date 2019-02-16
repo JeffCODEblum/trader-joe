@@ -141,7 +141,7 @@ function Poll() {
     }
 
     // check if we have made our profit threshold and we can sell all our coin
-    if (holdingsBtc * lastPrice < runningInvestment + profitThreshold) {
+    if (holdingsBtc * lastPrice > runningInvestment + profitThreshold) {
       var today = new Date();
       console.log("SELL");
       holdingsDollars += holdingsBtc * lastPrice;
@@ -165,11 +165,11 @@ function Poll() {
   }
   // prod mode
   // 500 times per day, max allowed by api, once every 2.88 minutes
-  //setTimeout(Poll, (1000 * 60 * 60 * 24) / 500);
+  setTimeout(Poll, (1000 * 60 * 60 * 24) / 500);
 
   // debug mode
   // once every 10 seconds
-  setTimeout(Poll, 1000 * 10);
+  //setTimeout(Poll, 1000 * 10);
 }
 Poll();
 
