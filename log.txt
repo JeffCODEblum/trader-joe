@@ -6,3 +6,19 @@ Thu Feb 14 2019 00:48:10 GMT-0500 (Eastern Standard Time)BUY
 
 Holdings: $9800   0.055458041832000954 BTC
 
+Fri Feb 15 2019 22:34:18 GMT-0500 (Eastern Standard Time)SELL
+
+Holdings: $10000   0 BTC
+
+Fri Feb 15 2019 22:34:18 GMT-0500 (Eastern Standard Time)BUY
+
+Holdings: $9900   0.02767675761249218 BTC
+
+Fri Feb 15 2019 22:34:28 GMT-0500 (Eastern Standard Time)BUY
+
+Holdings: $9900   0.02767675761249218 BTC
+
+Fri Feb 15 2019 22:34:28 GMT-0500 (Eastern Standard Time)SELL
+
+Holdings: $10000   0 BTC
+

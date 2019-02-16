@@ -6,6 +6,8 @@ const http = require("http").Server(app);
 const bodyParser = require("body-parser");
 const request = require("request");
 const fs = require("fs");
+// const mongoose = require('mongoose');
+
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname + "/public")));
@@ -23,6 +25,36 @@ var runningProfit = 0;
 var runningInvestment = 0;
 var profitThreshold = 1;
 var observationThreshold = 5;
+
+// const dataSchema = new mongoose.Schema({
+//   historical: Number[],
+//   historicalAverage: Number,
+//   lastPrice: Number,
+//   holdingsDollars: Number,
+//   holdingsBtc: Number,
+//   runningProfit: Number,
+//   runningInvestment: Number,
+//   profitThreshold: Number,
+//   observationThreshold: Number
+// });
+// const DataModel = mongoose.model('data', dataSchema);
+
+// DataModel.find({}, (err, docs) => {
+//   if (err) console.log(err);
+//   if (docs) {
+//     if (docs.length > 0) {
+//       historical = docs[0].historical;
+//       historicalAverage = docs[0].historicalAverage;
+//       lastPrice = docs[0].lastPrice;
+//       holdingsDollars = docs[0].holdingsDollars;
+//       holdingsBtc = docs[0].holdingsBtc;
+//       runningProfit = docs[0].runningProfit;
+//       runningInvestment = docs[0].runningInvestment;
+//       profitThreshold = docs[0].profitThreshold;
+//       observationThreshold = docs[0].observationThreshold;
+//     }
+//   }
+// });
 
 app.get("/data", function(req, res) {
   res.send({
@@ -44,9 +76,9 @@ function Poll() {
           parsed["Realtime Currency Exchange Rate"] &&
           parsed["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
         ) {
-          // console.log(
-          //   parsed["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
-          // );
+          console.log(
+            parsed["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
+          );
 
           // parse price from response
           lastPrice = parseFloat(
@@ -109,7 +141,8 @@ function Poll() {
     }
 
     // check if we have made our profit threshold and we can sell all our coin
-    if (holdingsBtc * lastPrice > runningInvestment + profitThreshold) {
+    if (holdingsBtc * lastPrice < runningInvestment + profitThreshold) {
+      var today = new Date();
       console.log("SELL");
       holdingsDollars += holdingsBtc * lastPrice;
       holdingsBtc = 0;
@@ -132,11 +165,11 @@ function Poll() {
   }
   // prod mode
   // 500 times per day, max allowed by api, once every 2.88 minutes
-  setTimeout(Poll, (1000 * 60 * 60 * 24) / 500);
+  //setTimeout(Poll, (1000 * 60 * 60 * 24) / 500);
 
   // debug mode
   // once every 10 seconds
-  //setTimeout(Poll, 1000 * 10);
+  setTimeout(Poll, 1000 * 10);
 }
 Poll();
 
